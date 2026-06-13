@@ -13,4 +13,6 @@
     <File Path="README.md" />
     <File Path="Smart.Results.sln.DotSettings" />
   </Folder>
+  <Project Path="Smart.Results/Smart.Results.csproj" />
+  <Project Path="Smart.Results.Tests/Smart.Results.Tests.csproj" />
 </Solution>
