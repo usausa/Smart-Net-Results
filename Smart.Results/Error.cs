@@ -3,7 +3,7 @@ namespace Smart.Results;
 #pragma warning disable CA1716
 public record Error(string Message)
 {
-    internal static readonly Error Default = new("An error has occurred.");
+    internal static readonly Error Default = new("Error.");
 
     public override string ToString() => Message;
 
