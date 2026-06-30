@@ -43,7 +43,7 @@ public static partial class ResultExtensions
 
     public static Result<T[]> Combine<T>(this IEnumerable<Result<T>> results)
     {
-        var values = new List<T>();
+        List<T>? values = null;
         List<Error>? errors = null;
         foreach (var result in results)
         {
@@ -51,14 +51,16 @@ public static partial class ResultExtensions
             {
                 errors ??= [];
                 errors.Add(result.Error);
+                values = null; // 失敗確定後は成功値を破棄
             }
             else if (errors is null)
             {
+                values ??= [];
                 values.Add(result.Value);
             }
         }
 
-        return errors is null ? Result.Success(values.ToArray()) : Result.Failure<T[]>(new AggregateError(errors));
+        return errors is null ? Result.Success(values?.ToArray() ?? []) : Result.Failure<T[]>(new AggregateError(errors));
     }
 
     //--------------------------------------------------------------------------------

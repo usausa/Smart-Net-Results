@@ -385,4 +385,14 @@ public sealed class MaybeTest
         // Assert
         Assert.False(maybe.HasValue);
     }
+
+    [Fact]
+    public void ToMaybeReturnsNoneWhenNullSuccess()
+    {
+        // Act
+        var maybe = Result.Success<string?>(null).ToMaybe();
+
+        // Assert
+        Assert.False(maybe.HasValue);
+    }
 }

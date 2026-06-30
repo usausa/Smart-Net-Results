@@ -139,4 +139,32 @@ public sealed class ResultExtensionsTest
         Assert.True(combined.IsSuccess);
         Assert.Empty(combined.Value);
     }
+
+    [Fact]
+    public void CombineOfTReturnsFailureWhenTrailingFailure()
+    {
+        // Arrange
+        var error = new Error("tail");
+        var results = new[] { Result.Success(1), Result.Success(2), Result.Failure<int>(error) };
+
+        // Act
+        var combined = results.Combine();
+
+        // Assert
+        Assert.True(combined.IsFailure);
+        var aggregate = Assert.IsType<AggregateError>(combined.Error);
+        Assert.Single(aggregate.Errors);
+        Assert.Same(error, aggregate.Errors[0]);
+    }
+
+    [Fact]
+    public void CombineOfTReturnsFailureWhenLeadingFailure()
+    {
+        // Arrange
+        var error = new Error("head");
+        var results = new[] { Result.Failure<int>(error), Result.Success(1) };
+
+        // Act & Assert
+        Assert.True(results.Combine().IsFailure);
+    }
 }
