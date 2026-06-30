@@ -192,7 +192,7 @@ var total = ParseQuantity(input)                                   // Result<int
 
 ### Errors
 
-`Result.Try` captures a thrown exception as an `ExceptionError`, and `Combine` aggregates many results into one.
+`Result.Try` captures a thrown exception as an `ExceptionError` (except `OperationCanceledException`, which is rethrown so cancellation propagates), and `Combine` aggregates many results into one.
 
 ```csharp
 var read = Result.Try(() => File.ReadAllText(path));   // ExceptionError on throw

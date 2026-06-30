@@ -24,6 +24,6 @@ public sealed record AggregateError : Error
     public AggregateError(IReadOnlyList<Error> errors)
         : base(errors.Count > 0 ? errors[0].Message : Default.Message)
     {
-        Errors = errors;
+        Errors = [.. errors];
     }
 }

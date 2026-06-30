@@ -59,6 +59,10 @@ public readonly struct Result : IEquatable<Result>
             action();
             return new(true, null);
         }
+        catch (OperationCanceledException)
+        {
+            throw;
+        }
 #pragma warning disable CA1031
         catch (Exception ex)
         {
@@ -72,6 +76,10 @@ public readonly struct Result : IEquatable<Result>
         try
         {
             return new(func());
+        }
+        catch (OperationCanceledException)
+        {
+            throw;
         }
 #pragma warning disable CA1031
         catch (Exception ex)
@@ -88,6 +96,10 @@ public readonly struct Result : IEquatable<Result>
             await func().ConfigureAwait(false);
             return new(true, null);
         }
+        catch (OperationCanceledException)
+        {
+            throw;
+        }
 #pragma warning disable CA1031
         catch (Exception ex)
         {
@@ -101,6 +113,10 @@ public readonly struct Result : IEquatable<Result>
         try
         {
             return new(await func().ConfigureAwait(false));
+        }
+        catch (OperationCanceledException)
+        {
+            throw;
         }
 #pragma warning disable CA1031
         catch (Exception ex)

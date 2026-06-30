@@ -110,6 +110,26 @@ public sealed class ResultTest
         Assert.Equal("oops", result.Error?.Message);
     }
 
+    [Fact]
+    public void TryRethrowsOperationCanceledException()
+    {
+        // Act & Assert
+        Assert.Throws<OperationCanceledException>(
+            () => Result.Try(static () => throw new OperationCanceledException()));
+    }
+
+    [Fact]
+    public async Task TryAsyncRethrowsOperationCanceledException()
+    {
+        // Act & Assert
+        await Assert.ThrowsAsync<OperationCanceledException>(
+            async () => await Result.TryAsync(static async () =>
+            {
+                await Task.Yield();
+                throw new OperationCanceledException();
+            }).ConfigureAwait(true)).ConfigureAwait(true);
+    }
+
     //--------------------------------------------------------------------------------
     // Bind
     //--------------------------------------------------------------------------------
@@ -715,6 +735,26 @@ public sealed class ResultTest
 
         // Assert
         Assert.Equal("oops", result.Error?.Message);
+    }
+
+    [Fact]
+    public void TryOfTRethrowsOperationCanceledException()
+    {
+        // Act & Assert
+        Assert.Throws<OperationCanceledException>(
+            () => Result.Try<int>(static () => throw new OperationCanceledException()));
+    }
+
+    [Fact]
+    public async Task TryAsyncOfTRethrowsOperationCanceledException()
+    {
+        // Act & Assert
+        await Assert.ThrowsAsync<OperationCanceledException>(
+            async () => await Result.TryAsync<int>(static async () =>
+            {
+                await Task.Yield();
+                throw new OperationCanceledException();
+            }).ConfigureAwait(true)).ConfigureAwait(true);
     }
 
     //--------------------------------------------------------------------------------

@@ -89,4 +89,22 @@ public sealed class ErrorTest
         // Assert
         Assert.Equal("Error.", aggregateError.Message);
     }
+
+    [Fact]
+    public void AggregateErrorCopiesSourceList()
+    {
+        // Arrange
+        var error1 = new Error("error1");
+        var list = new List<Error> { error1 };
+
+        // Act
+        var aggregateError = new AggregateError(list);
+        list.Add(new Error("error2"));
+        list[0] = new Error("changed");
+
+        // Assert
+        Assert.Single(aggregateError.Errors);
+        Assert.Same(error1, aggregateError.Errors[0]);
+        Assert.Equal("error1", aggregateError.Message);
+    }
 }
