@@ -99,6 +99,7 @@ public sealed class ResultExtensionsTest
         Assert.Same(error2, aggregateError.Errors[1]);
     }
 
+#pragma warning disable CA1861
     [Fact]
     public void CombineOfTReturnsValuesWhenAllSuccess()
     {
@@ -111,6 +112,7 @@ public sealed class ResultExtensionsTest
         // Assert
         Assert.Equal(new[] { 1, 2, 3 }, combined.Value);
     }
+#pragma warning restore CA1861
 
     [Fact]
     public void CombineOfTCollectsErrorsWhenFailure()

@@ -227,7 +227,7 @@ public readonly struct Result : IEquatable<Result>
         (IsSuccess == other.IsSuccess) && Equals(error, other.error);
 
     public override bool Equals(object? obj) =>
-        obj is Result other && Equals(other);
+        (obj is Result other) && Equals(other);
 
     public override int GetHashCode() =>
         HashCode.Combine(IsSuccess, error);
@@ -465,7 +465,7 @@ public readonly struct Result<T> : IEquatable<Result<T>>
         (IsSuccess == other.IsSuccess) && Equals(error, other.error) && EqualityComparer<T>.Default.Equals(value, other.value);
 
     public override bool Equals(object? obj) =>
-        obj is Result<T> other && Equals(other);
+        (obj is Result<T> other) && Equals(other);
 
     public override int GetHashCode() =>
         HashCode.Combine(IsSuccess, error, value);
