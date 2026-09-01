@@ -15,6 +15,7 @@ public record Error(string Message)
 
 public sealed record ExceptionError(Exception Exception) : Error(Exception.Message);
 
+#pragma warning disable CA1716
 public sealed record AggregateError : Error
 {
     public IReadOnlyList<Error> Errors { get; }
@@ -25,3 +26,4 @@ public sealed record AggregateError : Error
         Errors = [.. errors];
     }
 }
+#pragma warning restore CA1716
