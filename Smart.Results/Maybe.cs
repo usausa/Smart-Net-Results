@@ -13,7 +13,6 @@ public static class Maybe
     public static Maybe<T> None<T>() => default;
 }
 
-#pragma warning disable CA1000
 public readonly struct Maybe<T> : IEquatable<Maybe<T>>
 {
     private readonly T value;
@@ -143,4 +142,3 @@ public readonly struct Maybe<T> : IEquatable<Maybe<T>>
     public override string ToString() =>
         HasValue ? $"Some({value})" : "None";
 }
-#pragma warning restore CA1000

@@ -1,6 +1,5 @@
 namespace Smart.Results;
 
-#pragma warning disable CA1716
 public record Error(string Message)
 {
     internal static readonly Error Default = new("Error.");
@@ -13,7 +12,6 @@ public record Error(string Message)
     public static implicit operator Error(Exception ex) => new ExceptionError(ex);
 #pragma warning restore CA2225
 }
-#pragma warning restore CA1716
 
 public sealed record ExceptionError(Exception Exception) : Error(Exception.Message);
 
