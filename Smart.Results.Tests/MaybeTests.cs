@@ -1,6 +1,6 @@
 namespace Smart.Results;
 
-public sealed class MaybeTest
+public sealed class MaybeTests
 {
     //--------------------------------------------------------------------------------
     // Factory

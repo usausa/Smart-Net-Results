@@ -1,6 +1,6 @@
 namespace Smart.Results;
 
-public sealed class ErrorTest
+public sealed class ErrorTests
 {
     //--------------------------------------------------------------------------------
     // Error

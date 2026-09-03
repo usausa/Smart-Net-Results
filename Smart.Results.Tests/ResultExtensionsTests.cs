@@ -1,6 +1,6 @@
 namespace Smart.Results;
 
-public sealed class ResultExtensionsTest
+public sealed class ResultExtensionsTests
 {
     //--------------------------------------------------------------------------------
     // ToResult

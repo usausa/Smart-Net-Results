@@ -1,6 +1,6 @@
 namespace Smart.Results;
 
-public sealed class ResultExtensionsAsyncTest
+public sealed class ResultExtensionsAsyncTests
 {
     private static ValueTask<Result<int>> SuccessSource(int value) => new(Result.Success(value));
 
